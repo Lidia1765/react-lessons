@@ -9,7 +9,8 @@ export const Block = ({ value, currency, onChangeValue, onChangeCurrency }) => (
         <li
           onClick={() => onChangeCurrency(cur)}
           className={currency === cur ? 'active' : ''}
-          key={cur}>
+          key={cur}
+        >
           {cur}
         </li>
       ))}
