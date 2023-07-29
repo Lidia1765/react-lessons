@@ -14,47 +14,45 @@ function App() {
 
   React.useEffect(() => {
     fetch('https://reqres.in/api/users')
-    .then((res)=>res.json())
-    .then((json)=> {
-      setUsers(json.data);
-    })
-    .catch(err => {
-      console.log(warn);
-      alert('Error')
-    })
-    .finally(
-      (() => {
-        setLoading(false)
+      .then(res => res.json())
+      .then(json => setUsers(json.data))
+      .catch(err => {
+        console.log(err);
+        alert(`Error: ${err.message}`)
       })
-    ), []
-  });
+      .finally(() => setLoading(false))
+  }, []);
+
   const onChangeSearchValue = (event) => {
     setSearchValue(event.target.value);
    };
 
-   const onClickInite = (id) => {
+  const handleClickInite = (id) => {
     if (invites.includes(id)) {
-      setInvates (prev => prev.filter(_id => _id != id))
-    } else{
-      setInvates((prev) => [...prev, id])
+      setInvates(prev => prev.filter(_id => _id !== id))
+    } else {
+      setInvates(prev => [...prev, id])
     }
-   };
+  };
 
-   const onClickSendInvites = () => {
+  const handleClickSendInvites = () => {
     setSuccess(true);
-   }
+  }
+
   return (
     <div className="App">
-      {
-        success ? (<Success count={invites.length} />) :
-        (<Users 
+      {success ? (
+        <Success count={invites.length} />
+      ) : (
+        <Users
           onChangeSearchValue={onChangeSearchValue}
-          items={users} 
+          users={users}
           isLoading={isLoading}
           invites={invites}
-          onClickInite={onClickInite}
-          onClickSendInvites={onClickSendInvites}/>)
-      }
+          onClickInite={handleClickInite}
+          onClickSendInvites={handleClickSendInvites}
+        />
+      )}
     </div>
   );
 }
