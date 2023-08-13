@@ -4,7 +4,7 @@ import './index.scss';
 
 const Modal = ({ isOpen, onClose }) => (
   <div className={classNames('overlay animated', { 'show': isOpen })}>
-    <div />
+    <div className='overlay'/>
     <div className="modal">
       <svg onClick={onClose} height="200" viewBox="0 0 200 200" width="200">
         <title />
