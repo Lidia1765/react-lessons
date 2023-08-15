@@ -36,10 +36,9 @@ function Result({ correct }) {
 }
 
 function Game({ step, question, onClickVariant }) {
-  const percentage = Math.round(step / questions.length * 100);
   return (
     <>
-        <progress style={{ width: `${percentage}%` } } max="1" value="1"></progress>
+      <progress style={{width: '100%'}} max={questions.length} value={step}/>
       <h1>{question.title}</h1>
       <ul>
         {question.variants.map((text, index) => (
