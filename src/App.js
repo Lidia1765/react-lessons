@@ -44,20 +44,40 @@ function App() {
     setToPrice(value);
   };
 
+  const INPUT_TYPE_MAPPING = {
+    from: {
+      currency: setFromCurrency,
+      value: onChangeFromPrice
+    },
+    to: {
+      currency: setToCurrency,
+      value: onChangeToPrice
+    }
+  }
+
+  const handleInputValueChange = (type) => (e) => {
+    const value = e.target.value
+    INPUT_TYPE_MAPPING[type].value(value)
+  }
+
+  const handleCurrencyChange = (type) => (value) => () => {
+    INPUT_TYPE_MAPPING[type].currency(value)
+  }
+
   return (
     <div className="App">
       <Block 
         value={fromPrice} 
         currency={fromCurrency} 
-        onChangeCurrency={setFromCurrency}
-        onChangeValue={onChangeFromPrice}
+        onChangeCurrency={handleCurrencyChange('from')}
+        onChangeValue={handleInputValueChange('from')}
       />
 
       <Block
         value={toPrice} 
         currency={toCurrency} 
-        onChangeCurrency={setToCurrency}
-        onChangeValue={onChangeToPrice}
+        onChangeCurrency={handleCurrencyChange('to')}
+        onChangeValue={handleInputValueChange('to')}
       />
     </div>
   );
