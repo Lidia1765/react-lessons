@@ -35,6 +35,18 @@ function App() {
   .finally(() => setIsLoading(false));
   },[categoryId, page]);
 
+  const handlePage = (i) => {
+    setPage(i + 1)
+  }
+
+  const handleSearch = (event) => {
+    setSearchValue(event.target.value)
+  }
+
+  const handleCategory = (i) => {
+    setCategoryId(i)
+  }
+
   return (
     <div className="App">
       <h1>Моя коллекция фотографий</h1>
@@ -42,7 +54,7 @@ function App() {
         <ul className="tags">
           {
             cats.map((obj, i) => (
-            <li onClick={() => setCategoryId(i)} 
+            <li onClick={handleCategory} 
             className={categoryId === i ? 'active' : ''} 
             key={obj.name}>
             {obj.name}</li>))
@@ -50,7 +62,7 @@ function App() {
         </ul>
         <input 
         value={searchValue} 
-        onChange={(e) => setSearchValue(e.target.value)} 
+        onChange={handleSearch} 
         className="search-input" 
         placeholder="Поиск по названию" />
       </div>
@@ -72,7 +84,7 @@ function App() {
       <ul className="pagination">
         {
           [...Array(5)].map((_, i) => (
-            <li onClick={() => setPage(i + 1)} className={page === i + 1 ? 'active' : ''}>{i + 1}</li>
+            <li onClick={handlePage} className={page === i + 1 ? 'active' : ''}>{i + 1}</li>
           ))
         }
       </ul>
