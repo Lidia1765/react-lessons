@@ -11,7 +11,8 @@ export const Block = ({ value, currency, onChangeValue, onChangeCurrency }) => (
           //onClick={(onChangeCurrency()) => (cur)}
           
           className={currency === cur ? 'active' : ''}
-          key={cur}>
+          key={cur}
+        >
           {cur}
         </li>
       ))}
@@ -23,7 +24,7 @@ export const Block = ({ value, currency, onChangeValue, onChangeCurrency }) => (
       </li>
     </ul>
     <input
-      onChange={(e) => onChangeValue(e.target.value)}
+      onChange={onChangeValue}
       value={value}
       type="number"
       placeholder={0}
